@@ -1,0 +1,25 @@
+<!-- app/views/dogs/index.html.erb -->
+<div class="container">
+  <div class="content-wrapper">
+    <div class="form-container">
+      <h1>Displaying Dog Picture</h1>
+<!-- app/views/dogs/index.html.erb -->
+<%= form_tag(dogs_path, method: "get", remote: true, data: { controller: 'dog' }) do %>
+<%= text_field_tag(:breed, params[:breed], placeholder: "Enter dog breed") %>
+  <%= submit_tag("Get Dog Picture", data: { action: 'click->dogs#submitForm' }) %>
+<% end %>
+
+      <% if @breed.present? %>
+        <p>Submitted Dog Breed: <%= @breed.capitalize %></p>
+      <% end %>
+    </div>
+
+    <div class="image-container">
+      <% if @dog_picture.present? %>
+        <img src="<%= @dog_picture %>" alt="Dog Picture">
+      <% else %>
+        <p>No picture available for the specified breed.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
